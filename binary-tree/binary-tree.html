@@ -108,7 +108,22 @@
 
 			// 查找二叉树最小值
 			// 
-			this.search
+			// 
+			var searchMinNode = function(node) {
+				if(node !== null) {
+					while(node && node.left !== null ){
+						node = node.left
+					}
+					return node
+				}
+				return null
+			}
+			this.searchMin = function() {
+				return searchMinNode(root)
+			}
+
+
+			
 		}
 
 
@@ -139,6 +154,10 @@
 		}
 
 		tree.postOrderTraverse(postOrderCallback)
+
+
+		var minNode = tree.searchMin()
+		console.log("the minimun node of this tree is:" + JSON.stringify(minNode))
 
 
 
