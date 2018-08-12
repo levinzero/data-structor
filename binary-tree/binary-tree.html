@@ -10,7 +10,62 @@
 	
 	<script  type="text/javascript" charset="utf-8">
 		
-		
+		//创建一个排序二叉树
+		//
+		function BinaryTree() {
+			var Node = function(key) {
+				this.key = key
+				this.left = null
+				this.right = null
+			}
+
+			var root = null
+
+			var insertNode = function(node, newNode) {
+				if(node !== null) {
+					if(newNode.key < node.key) {
+						insertNode(node.left, newNode)
+						if(node.left == null) {
+							node.left = newNode
+						}
+					}else{
+						insertNode(node.right, newNode)
+						if(node.right == null) {
+							node.right = newNode
+						}
+					}
+				}
+
+				return null
+			}
+
+			//插入节点
+			this.insert = function(key) {
+				var newNode = new Node(key)
+				if(root === null) {
+					root = newNode
+				}else {
+					insertNode(root, newNode)
+				}
+			}
+
+			this.getTree = function() {
+				return root
+			}
+		}
+
+
+		var tree = new BinaryTree()
+		var nodes = [8, 3, 10, 1, 6, 14, 4, 7, 11, 15]
+		nodes.forEach(function(item) {
+			tree.insert(item)
+		})
+
+		console.log(tree.getTree())
+
+
+
+
 	</script>
 </body>
 </html>
