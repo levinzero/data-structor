@@ -158,6 +158,71 @@
 			this.search = function(key) {
 				return searchKey(root, key)
 			}
+
+
+			var findRightMinNode = function(node) {
+				if(node !== null) {
+					while(node && node.left !== null) {
+						node = node.left
+					}
+					return node
+				}
+				return null
+			}
+
+
+			var removeNode = function(node, key) {
+				if(node !== null) {
+					if(key < node.key) {
+						node.left = removeNode(node.left, key)
+						return node
+					}else if(key > node.key) {
+						node.right = removeNode(node.right, key)
+						return node
+					} else {
+						//叶子节点
+						if(node.left === null && node.right === null) {
+							node = null
+							return node
+						}
+
+						//普通节点只有右孩子
+						if(node.left === null) {
+							node = node.right
+							return node
+						}
+
+						//普通节点只有左孩子
+						if(node.right === null) {
+							node = node.left
+							return node
+						}
+
+						// 普通节点，左右孩子均不为null
+						// 
+						// 1:先找到其右子节点的最小值节点
+						var rightMinNode = findRightMinNode(node.right)
+						// 2:将最小值赋予当前节点
+						node.key = rightMinNode.key
+						// 3:删除掉其右孩子节点的最小值节点
+						node.right = removeNode(node.right, rightMinNode.key)
+						return node
+
+					}
+
+
+				}
+
+				return null
+			}
+
+
+			// 删除二叉树节点
+			// 
+			this.remove = function(key) {
+				root = removeNode(root, key)
+				return root
+			}
 		}
 
 
@@ -205,6 +270,11 @@
 		var result2 = tree.search(0)
 
 		console.log("the key of 0 can be searched in the tree ?:" + result2)
+
+
+		var newTree = tree.remove(3)
+		console.log(newTree)
+		console.log("after removing 3, the tree now is:" + JSON.stringify(newTree))
 
 
 	</script>
