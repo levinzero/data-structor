@@ -24,14 +24,18 @@
 			var insertNode = function(node, newNode) {
 				if(node !== null) {
 					if(newNode.key < node.key) {
-						insertNode(node.left, newNode)
+						
 						if(node.left == null) {
 							node.left = newNode
+						}else {
+							insertNode(node.left, newNode)
 						}
 					}else{
-						insertNode(node.right, newNode)
+						
 						if(node.right == null) {
 							node.right = newNode
+						} else {
+							insertNode(node.right, newNode)
 						}
 					}
 				}
@@ -100,6 +104,11 @@
 			this.postOrderTraverse = function(callback) {
 				postOrderTraverseNode(root, callback)
 			}
+
+
+			// 查找二叉树最小值
+			// 
+			this.search
 		}
 
 
