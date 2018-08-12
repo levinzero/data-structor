@@ -84,6 +84,22 @@
 			this.inOrderTraverse = function(callback) {
 				inOrderTraverseNode(root, callback)
 			}
+
+
+			// 后序遍历
+			// 
+			var postOrderTraverseNode = function(node, callback) {
+				if(node !== null) {
+					postOrderTraverseNode(node.left, callback)
+					postOrderTraverseNode(node.right, callback)
+					callback(node)
+				}
+			}
+
+
+			this.postOrderTraverse = function(callback) {
+				postOrderTraverseNode(root, callback)
+			}
 		}
 
 
@@ -107,6 +123,14 @@
 		}
 
 		tree.inOrderTraverse(inOrderCallback)
+
+
+		var postOrderCallback = function(node) {
+			console.log(node.key)
+		}
+
+		tree.postOrderTraverse(postOrderCallback)
+
 
 
 
