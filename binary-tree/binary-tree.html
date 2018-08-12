@@ -138,6 +138,26 @@
 			this.searchMax= function() {
 				return searchMaxNode(root)
 			}
+
+			// 查找某个值
+			
+			var searchKey = function(node, key) {
+				if(node !== null) {
+					if(key < node.key) {
+						return searchKey(node.left, key)
+					}else if(key > node.key) {
+						return searchKey(node.right, key)
+					}else {
+						return true
+					}
+				}
+
+				return false
+			}
+
+			this.search = function(key) {
+				return searchKey(root, key)
+			}
 		}
 
 
@@ -177,7 +197,14 @@
 		var maxNode = tree.searchMax()
 		console.log("the maximun node of this tree is:" + JSON.stringify(maxNode))
 
+		var result1 = tree.search(3)
 
+		console.log("the key of 3 can be searched in the tree ?:" + result1)
+
+
+		var result2 = tree.search(0)
+
+		console.log("the key of 0 can be searched in the tree ?:" + result2)
 
 
 	</script>
